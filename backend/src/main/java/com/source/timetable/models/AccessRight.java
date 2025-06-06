@@ -18,6 +18,10 @@ public class AccessRight {
     @Column(nullable = false)
     private LocalDate creationDate;
 
+    @ManyToOne
+    @JoinColumn(name = "administrator_id", nullable = false)
+    private Admin admin;
+
     public AccessRight(int id, String description, LocalDate creationDate) {
         this.id = id;
         this.description = description;
@@ -25,30 +29,6 @@ public class AccessRight {
     }
 
     public AccessRight() {
-        super();
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
     }
 }

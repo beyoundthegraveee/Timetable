@@ -1,0 +1,33 @@
+.nav-container {
+    width: 220px;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding-top: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list li {
+    margin-bottom: 10px;
+}
+
+.nav-list li a {
+    display: block;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-list li a:hover {
+    background-color: #ddd;
+    color: #000;
+}

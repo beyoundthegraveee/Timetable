@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/login.css';
 import '../styles/modal.css';
+import Cookies from 'js-cookie';
 import Modal from 'react-modal';
 import axios from 'axios';
+import { useRole } from '../context/RoleContext';
 
 const LoginPage = () => {
     const [login, setLogin] = useState('');
@@ -11,17 +13,20 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
+    const { setRole } = useRole();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const User = {
-            Login: login,
-            Password: password,
+            login: login,
+            password: password,
         };
         try {
-            const response = await axios.post('http://localhost:4040/users/login', User);
+            const response = await axios.post('http://localhost:8080/users/login', User);
             if (response.status === 200) {
-                const user = response.data.user;
+                const userData = response.data.user;
+                setRole(mapServerRole(userData.role));
+                Cookies.set('user', JSON.stringify(userData), { expires: 1 });
                 setIsModalOpen(true);
             } else {
                 setError(response.data.message || 'Login failed');
@@ -37,7 +42,20 @@ const LoginPage = () => {
     };
 
     const handleButtonClick = () => {
-        navigate(`/home`);
+        navigate(`/timetable`);
+    };
+
+    const mapServerRole = (serverRole) => {
+        switch (serverRole) {
+            case 'ADMINISTRATOR':
+                return 'admin';
+            case 'STUDENT':
+                return 'student';
+            case 'PROFESSOR':
+                return 'professor';
+            default:
+                return 'guest';
+        }
     };
 
     return (

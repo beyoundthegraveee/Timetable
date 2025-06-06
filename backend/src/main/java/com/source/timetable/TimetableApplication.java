@@ -10,4 +10,6 @@ public class TimetableApplication {
 		SpringApplication.run(TimetableApplication.class, args);
 	}
 
+
+
 }

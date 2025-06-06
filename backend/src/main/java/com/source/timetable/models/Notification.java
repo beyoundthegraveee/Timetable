@@ -4,20 +4,22 @@ import com.source.timetable.enums.NotificationStatus;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "notifications")
 public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @Column(nullable = false)
-    private GroupOfStudents groupOfStudents;
+    private String currentGroup;
 
     @Column(nullable = false)
-    private GroupOfStudents targetGroup;
+    private String targetGroup;
 
     @Column(nullable = false)
     private NotificationStatus notificationStatus;
@@ -26,8 +28,7 @@ public class Notification {
     private String description;
 
 
+    public Notification() {
 
-
-
-
+    }
 }

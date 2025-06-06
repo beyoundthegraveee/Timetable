@@ -4,10 +4,12 @@ import com.source.timetable.enums.AccountStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
 @Table(name = "administrators")
+@PrimaryKeyJoinColumn(name = "id")
 public class Admin extends User{
 
     @Column(nullable = false)
@@ -17,7 +19,9 @@ public class Admin extends User{
     @Column(nullable = false)
     private AccountStatus accountStatus;
 
-    private Map<Integer, AccessRight> mapAccessRight;
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    @MapKey(name = "id")
+    private Map<Integer, AccessRight> accessRights = new HashMap<>();
 
     public Admin() {
         super();

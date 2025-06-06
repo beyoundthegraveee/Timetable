@@ -1,8 +1,6 @@
 package com.source.timetable.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "students")
+@PrimaryKeyJoinColumn(name = "id")
 public class Student extends User{
 
     @Column(nullable = false, unique = true)
@@ -21,19 +20,54 @@ public class Student extends User{
     @Column(nullable = false)
     private int currentSemester;
 
-    private List<Notification> listOfNotifications;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private GroupOfStudents groupOfStudents;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> listOfNotifications = new ArrayList<>();
 
     public Student() {
         super();
     }
 
-    public Student(int id, String firstName, String lastName, LocalDate birthDate, String email, String login, String password, String studentNumber, String nationality, int currentSemester) {
-        super(id, firstName, lastName, birthDate, email, login, password);
-        this.studentNumber = studentNumber;
-        this.nationality = nationality;
-        this.currentSemester = currentSemester;
-        this.listOfNotifications = new ArrayList<>();
+    public String getStudentNumber() {
+        return studentNumber;
     }
 
+    public void setStudentNumber(String studentNumber) {
+        this.studentNumber = studentNumber;
+    }
 
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public int getCurrentSemester() {
+        return currentSemester;
+    }
+
+    public void setCurrentSemester(int currentSemester) {
+        this.currentSemester = currentSemester;
+    }
+
+    public GroupOfStudents getGroupOfStudents() {
+        return groupOfStudents;
+    }
+
+    public void setGroupOfStudents(GroupOfStudents groupOfStudents) {
+        this.groupOfStudents = groupOfStudents;
+    }
+
+    public List<Notification> getListOfNotifications() {
+        return listOfNotifications;
+    }
+
+    public void setListOfNotifications(List<Notification> listOfNotifications) {
+        this.listOfNotifications = listOfNotifications;
+    }
 }
