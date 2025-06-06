@@ -12,7 +12,8 @@
     align-items: center;
     min-height: 100vh;
     background-image: url('../background_images/background.jpg');
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
@@ -64,7 +65,7 @@ form label {
 }
 
 form input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;

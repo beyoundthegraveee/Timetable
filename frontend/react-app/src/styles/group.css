@@ -1,0 +1,94 @@
+.group-list, .group-form, .student-list {
+    margin-bottom: 40px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.group-list h2,
+.group-form h2,
+.student-list h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.group-list ul,
+.student-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.group-list li,
+.student-list li {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 16px;
+}
+
+.group-list li:last-child,
+.student-list li:last-child {
+    border-bottom: none;
+}
+
+.group-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.group-form input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.group-form button {
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.group-form button:hover {
+    background-color: #0056b3;
+}
+
+.group-list ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.group-list li {
+    width: auto;
+}
+
+.group-button {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    max-width: 280px;
+    width: 100%;
+}
+
+.group-button:hover {
+    background-color: #e0e0e0;
+    color: #000;
+    text-decoration: none;
+}

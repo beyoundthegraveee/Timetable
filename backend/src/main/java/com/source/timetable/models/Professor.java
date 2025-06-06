@@ -1,8 +1,6 @@
 package com.source.timetable.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "professors")
+@PrimaryKeyJoinColumn(name = "id")
 public class Professor extends User{
 
     @Column(nullable = false)
@@ -24,6 +23,7 @@ public class Professor extends User{
     @Column(nullable = false)
     private String departmentName;
 
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests;
 
     public Professor() {
