@@ -8,4 +8,8 @@ import java.util.List;
 public interface StudentService {
 
     List<Student> getStudentsByGroup(GroupOfStudents group);
+
+    Student getStudentById(int id);
+
+
 }

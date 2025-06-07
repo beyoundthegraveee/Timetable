@@ -21,4 +21,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getStudentsByGroup(GroupOfStudents group) {
         return studentRepo.findStudentsByGroupOfStudents(group);
     }
+
+    @Override
+    public Student getStudentById(int id) {
+        return studentRepo.findStudentById(id);
+    }
 }

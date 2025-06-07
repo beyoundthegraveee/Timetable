@@ -8,6 +8,7 @@ import OtherTablesPage from "./components/OtherTablesPage";
 import GroupPage from "./components/GroupPage";
 import RequestPage from "./components/RequestPage";
 import NotificationPage from "./components/NotificationPage";
+import CreateNotificationPage from "./components/CreateNotificationPage";
 import CreatePage from "./components/CreatePage";
 import ManagePage from "./components/ManagePage";
 import ImplementPage from "./components/ImplementPage";
@@ -67,6 +68,15 @@ const AppContent = () => {
                                 <NotificationPage />
                             </ProtectedRoute>
                         }
+                    />
+
+                    <Route
+                        path="/notification/create"
+                           element={
+                               <ProtectedRoute allowedRoles={['student']}>
+                                   <CreateNotificationPage />
+                               </ProtectedRoute>
+                           }
                     />
 
                     <Route

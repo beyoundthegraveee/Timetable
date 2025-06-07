@@ -25,8 +25,13 @@ const LoginPage = () => {
             const response = await axios.post('http://localhost:8080/users/login', User);
             if (response.status === 200) {
                 const userData = response.data.user;
+                const groupId = userData.groupOfStudents?.id;
+                if (groupId) {
+                    Cookies.set("groupId", groupId.toString(), { expires: 1 });
+                }
                 setRole(mapServerRole(userData.role));
                 Cookies.set('user', JSON.stringify(userData), { expires: 1 });
+                Cookies.set('groupId', groupId, { expires: 1 });
                 setIsModalOpen(true);
             } else {
                 setError(response.data.message || 'Login failed');
