@@ -1,5 +1,6 @@
 package com.source.timetable.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "students")
 @PrimaryKeyJoinColumn(name = "id")
-public class Student extends User{
+public class Student extends User {
 
     @Column(nullable = false, unique = true)
     private String studentNumber;
@@ -25,6 +26,7 @@ public class Student extends User{
     private GroupOfStudents groupOfStudents;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Notification> listOfNotifications = new ArrayList<>();
 
     public Student() {

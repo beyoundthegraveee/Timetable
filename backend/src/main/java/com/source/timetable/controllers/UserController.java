@@ -1,6 +1,7 @@
 package com.source.timetable.controllers;
 
 import com.source.timetable.DTOs.LoginRequest;
+import com.source.timetable.models.Student;
 import com.source.timetable.models.User;
 import com.source.timetable.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,15 @@ public class UserController {
         Optional<User> user = userService.authenticate(request.getLogin(), request.getPassword());
 
         if (user.isPresent()) {
-            return ResponseEntity.ok().body(Map.of("user", user.get()));
+            User u = user.get();
+            if (u instanceof Student student) {
+                int groupId = student.getGroupOfStudents().getId();
+                return ResponseEntity.ok().body(Map.of(
+                        "user", student,
+                        "groupId", groupId
+                ));
+            }
+            return ResponseEntity.ok().body(Map.of("user", u));
         } else {
             return ResponseEntity.status(401).body(Map.of("message", "Invalid login or password"));
         }

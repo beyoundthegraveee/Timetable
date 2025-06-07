@@ -26,38 +26,39 @@ const GroupPage = () => {
     };
 
     return (
-        <div className="content">
+        <div className="content group-page">
             <h1 className="title">Group Viewer</h1>
-
-            <section className="group-list">
-                <h2>Available Groups:</h2>
-                <ul>
-                    {groups.map(group => (
-                        <li key={group.id}>
-                            <button className="group-button" onClick={() => handleGroupClick(group.name)}>
-                                {group.name} (max: {group.maxCountOfStudents})
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </section>
-
-            {selectedGroup && (
-                <section className="student-list">
-                    <h2>Students in {selectedGroup}</h2>
-                    {students.length > 0 ? (
-                        <ul>
-                            {students.map(student => (
-                                <li key={student.id}>
-                                    {student.id}. {student.firstName} {student.lastName} — {student.studentNumber}
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No students found in this group.</p>
-                    )}
+            <div className="group-container">
+                <section className="group-list">
+                    <h2>Available Groups:</h2>
+                    <ul>
+                        {groups.map(group => (
+                            <li key={group.id}>
+                                <button className="group-button" onClick={() => handleGroupClick(group.name)}>
+                                    {group.name} (max: {group.maxCountOfStudents})
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
                 </section>
-            )}
+
+                {selectedGroup && (
+                    <section className="student-list">
+                        <h2>Students in {selectedGroup}</h2>
+                        {students.length > 0 ? (
+                            <ul>
+                                {students.map(student => (
+                                    <li key={student.id}>
+                                        {student.id}. {student.firstName} {student.lastName} — {student.studentNumber}
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No students found in this group.</p>
+                        )}
+                    </section>
+                )}
+            </div>
         </div>
     );
 };

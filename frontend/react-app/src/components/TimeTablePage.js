@@ -3,37 +3,39 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import axios from "axios";
 import "../styles/timetable.css";
+import Cookies from "js-cookie";
 
-const TimeTablePage = ({ groupId = 1 }) => {
+const TimeTablePage = () => {
     const [events, setEvents] = useState([])
+    const groupId = Cookies.get("groupId");
 
     useEffect(() => {
+        if (!groupId) return;
         axios.get(`http://localhost:8080/lessons/group/${groupId}`)
             .then(res => setEvents(res.data))
             .catch(err => console.error("Error fetching lessons", err));
     }, [groupId]);
 
     return (
-
-            <div className="content">
-                <h1 className="title">TIMETABLE</h1>
-                <FullCalendar
-                    plugins={[timeGridPlugin]}
-                    initialView="timeGridWeek"
-                    allDaySlot={false}
-                    slotMinTime="06:00:00"
-                    slotMaxTime="20:00:00"
-                    events={events}
-                    height="auto"
-                    nowIndicator={true}
-                    editable={false}
-                    headerToolbar={{
-                        start: "today prev,next",
-                        center: "title",
-                        end: "timeGridDay,timeGridWeek"
-                    }}
-                />
-            </div>
+        <div className="content timetable-page">
+            <h1 className="title">TIMETABLE</h1>
+            <FullCalendar
+                plugins={[timeGridPlugin]}
+                initialView="timeGridWeek"
+                allDaySlot={false}
+                slotMinTime="06:00:00"
+                slotMaxTime="20:00:00"
+                events={events}
+                height="auto"
+                nowIndicator={true}
+                editable={false}
+                headerToolbar={{
+                    start: "today prev,next",
+                    center: "title",
+                    end: "timeGridDay,timeGridWeek"
+                }}
+            />
+        </div>
     );
 };
 

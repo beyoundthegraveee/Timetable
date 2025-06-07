@@ -57,4 +57,13 @@ public class GroupController {
         return ResponseEntity.ok(studentDTOs);
     }
 
+    @GetMapping("/id/{groupName}")
+    public ResponseEntity<Integer> getGroupIdByGroupName(@PathVariable String groupName) {
+        GroupOfStudents group = groupService.getGroupByName(groupName);
+        if (group == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(group.getId());
+    }
+
 }

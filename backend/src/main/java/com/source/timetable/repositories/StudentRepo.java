@@ -12,5 +12,7 @@ public interface StudentRepo extends JpaRepository<Student, Integer> {
 
     List<Student> findStudentsByGroupOfStudents(GroupOfStudents group);
 
+    Student findStudentById(int id);
+
 
 }
