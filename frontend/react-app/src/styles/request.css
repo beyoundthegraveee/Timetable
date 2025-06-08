@@ -1,0 +1,85 @@
+.request-background {
+    background-image: url('../background_images/IMG_2960.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px 0;
+    min-height: 100vh;
+}
+
+.request-page {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-family: sans-serif;
+    background-color: #cccccc;
+}
+
+.request-page h2,
+.request-page h3 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.request-page ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.request-page li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.request-page li:last-child {
+    border-bottom: none;
+}
+
+.request-page li span.status-denied {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.request-page li span.status-submitted {
+    color: #0275d8;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+form label {
+    font-weight: 500;
+    color: #333;
+}
+
+form input,
+form select {
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+form button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}

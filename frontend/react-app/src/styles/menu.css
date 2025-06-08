@@ -31,3 +31,19 @@
     background-color: #ddd;
     color: #000;
 }
+
+.logout-button {
+    background-color: transparent;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #dc3545;
+    color: #fff;
+}

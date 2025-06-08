@@ -18,6 +18,10 @@ public class Lesson {
     private GroupOfStudents group;
 
     @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
@@ -54,6 +58,14 @@ public class Lesson {
 
     public void setGroup(GroupOfStudents group) {
         this.group = group;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     public Course getCourse() {

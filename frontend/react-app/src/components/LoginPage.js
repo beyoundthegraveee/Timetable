@@ -25,19 +25,21 @@ const LoginPage = () => {
             const response = await axios.post('http://localhost:8080/users/login', User);
             if (response.status === 200) {
                 const userData = response.data.user;
-                const groupId = userData.groupOfStudents?.id;
-                if (groupId) {
-                    Cookies.set("groupId", groupId.toString(), { expires: 1 });
+                const groupId = response.data.groupId ?? null;
+                Cookies.set('user', JSON.stringify(userData), { expires: 1 });
+                Cookies.set('role', userData.role, { expires: 1 });
+                Cookies.set('userId', userData.id.toString(), { expires: 1 });
+                if (groupId !== null) {
+                    Cookies.set('groupId', groupId.toString(), { expires: 1 });
                 }
                 setRole(mapServerRole(userData.role));
-                Cookies.set('user', JSON.stringify(userData), { expires: 1 });
-                Cookies.set('groupId', groupId, { expires: 1 });
                 setIsModalOpen(true);
             } else {
                 setError(response.data.message || 'Login failed');
             }
         } catch (error) {
             setError('An error occurred. Please try again later.');
+            console.error("Login error:", error);
         }
     };
 
@@ -47,7 +49,7 @@ const LoginPage = () => {
     };
 
     const handleButtonClick = () => {
-        navigate(`/timetable`);
+        navigate(`/group`);
     };
 
     const mapServerRole = (serverRole) => {
@@ -65,7 +67,7 @@ const LoginPage = () => {
 
     return (
         <div className="login-page">
-            <h2>Login</h2>
+            <h2>Hey!</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="login">Login:</label>
@@ -88,7 +90,7 @@ const LoginPage = () => {
                     />
                 </div>
                 {error && <p className="error">{error}</p>}
-                <button type="submit">Login</button>
+                <button type="submit">Sign in</button>
             </form>
 
             <Modal

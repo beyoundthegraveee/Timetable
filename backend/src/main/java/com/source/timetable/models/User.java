@@ -1,6 +1,7 @@
 package com.source.timetable.models;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.source.timetable.enums.Role;
 import jakarta.persistence.*;
 
@@ -53,8 +54,9 @@ public class User {
     }
 
 
+    @JsonProperty("id")
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -115,5 +117,19 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

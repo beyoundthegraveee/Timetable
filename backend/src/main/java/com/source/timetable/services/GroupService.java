@@ -10,4 +10,5 @@ public interface GroupService {
 
     GroupOfStudents getGroupByName(String name);
 
+    GroupOfStudents getById(int toGroupId);
 }

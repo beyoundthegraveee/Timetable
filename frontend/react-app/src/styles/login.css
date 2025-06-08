@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'CormorantGaramondRegular';
+    font-family: 'CormorantGaramondBold';
     src: url('../fonts/CormorantGaramond-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -24,7 +24,7 @@
     font-size: 40px;
     margin-bottom: 20px;
 
-    background: linear-gradient(-45deg, #ff0000, #ffffff, #ff0000);
+    background: linear-gradient(-45deg, #000000, #ffffff, #000000);
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

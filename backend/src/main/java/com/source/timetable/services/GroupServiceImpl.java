@@ -26,4 +26,9 @@ public class GroupServiceImpl implements GroupService {
     public GroupOfStudents getGroupByName(String name) {
         return groupRepo.findByName(name);
     }
+
+    @Override
+    public GroupOfStudents getById(int toGroupId) {
+        return groupRepo.findById(toGroupId).orElse(null);
+    }
 }

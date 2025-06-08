@@ -1,0 +1,84 @@
+.manage-background {
+    background-image: url('../background_images/IMG_2957.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+.manage-page {
+    padding: 30px;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 10px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.list-container {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.list-section {
+    width: 45%;
+}
+
+.scrollable {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.item {
+    padding: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.item:hover {
+    background-color: #f0f0f0;
+}
+
+.action-panel {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.action-panel button {
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+button.approve {
+    background-color: #28a745;
+    color: white;
+}
+
+button.reject {
+    background-color: #dc3545;
+    color: white;
+}

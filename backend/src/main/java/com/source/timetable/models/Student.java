@@ -27,7 +27,7 @@ public class Student extends User {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Notification> listOfNotifications = new ArrayList<>();
+    private List<Notification> listOfNotifications;
 
     public Student() {
         super();
