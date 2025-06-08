@@ -75,6 +75,9 @@ public class UserServiceImpl implements UserService {
     }
 
     private void fillUserFields(User user, CreateUserDTO dto) {
+        if (!User.isValidEmail(dto.email)) {
+            throw new IllegalArgumentException("Invalid email format: " + dto.email);
+        }
         user.setFirstName(dto.firstName);
         user.setLastName(dto.lastName);
         user.setBirthDate(dto.birthDate);

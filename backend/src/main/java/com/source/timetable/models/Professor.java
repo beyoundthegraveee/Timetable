@@ -34,6 +34,11 @@ public class Professor extends User{
         super();
     }
 
+    @Override
+    public String getUserTypeInfo(){
+        return "Professor " + this.getFirstName() + " "+ this.getLastName()+" work in: " + departmentName + " is " + academicDegree;
+    };
+
     public LocalDate getEmploymentDate() {
         return employmentDate;
     }

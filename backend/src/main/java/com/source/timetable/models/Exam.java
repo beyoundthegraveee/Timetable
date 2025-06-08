@@ -38,4 +38,59 @@ public class Exam {
 
     public Exam() {}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public LocalDate getExam_date() {
+        return exam_date;
+    }
+
+    public void setExam_date(LocalDate exam_date) {
+        this.exam_date = exam_date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public ExamType getType() {
+        return type;
+    }
+
+    public void setType(ExamType type) {
+        this.type = type;
+    }
+
+    public int getMaxPoints() {
+        return maxPoints;
+    }
+
+    public void setMaxPoints(int maxPoints) {
+        this.maxPoints = maxPoints;
+    }
 }

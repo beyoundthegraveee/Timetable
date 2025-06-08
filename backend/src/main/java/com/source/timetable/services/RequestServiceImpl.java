@@ -1,16 +1,17 @@
 package com.source.timetable.services;
 
 import com.source.timetable.DTOs.RequestDTO;
-import com.source.timetable.enums.NotificationStatus;
 import com.source.timetable.enums.RequestStatus;
+import com.source.timetable.models.Professor;
 import com.source.timetable.models.Request;
 import com.source.timetable.repositories.RequestRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -40,6 +41,11 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public Request updateRequest(Request request) {
+        return requestRepo.save(request);
+    }
+
+    @Override
     public List<Request> findAll() {
         return requestRepo.findAll();
     }
@@ -57,6 +63,11 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public List<Request> findByStatus(RequestStatus requestStatus) {
         return requestRepo.findByRequestStatus(requestStatus);
+    }
+
+    @Override
+    public Request findByProfessorDateAndTime(Professor professor, LocalDate date, LocalTime startTime) {
+        return requestRepo.findByProfessorAndClassesDateAndClassesTime(professor, date, startTime);
     }
 
 

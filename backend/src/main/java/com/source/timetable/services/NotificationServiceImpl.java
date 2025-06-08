@@ -1,7 +1,9 @@
 package com.source.timetable.services;
 
 import com.source.timetable.enums.NotificationStatus;
+import com.source.timetable.models.GroupOfStudents;
 import com.source.timetable.models.Notification;
+import com.source.timetable.models.Student;
 import com.source.timetable.repositories.NotificationRepo;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,16 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public List<Notification> findByStatus(NotificationStatus notificationStatus) {
         return notificationRepo.findByNotificationStatus(notificationStatus);
+    }
+
+    @Override
+    public Notification findByStudentAndGroups(Student student, int fromGroup, int toGroup) {
+        return notificationRepo.findByStudentAndCurrentGroupAndTargetGroup(student, fromGroup, toGroup);
+    }
+
+    @Override
+    public void save(Notification notification) {
+        notificationRepo.save(notification);
     }
 
 }

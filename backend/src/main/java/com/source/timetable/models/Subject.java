@@ -4,6 +4,8 @@ import com.source.timetable.enums.SubjectType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Entity
 @Table(name = "subjects")
 @AllArgsConstructor
@@ -68,5 +70,28 @@ public class Subject {
 
     public void setSubjectType(SubjectType subjectType) {
         this.subjectType = subjectType;
+    }
+
+    public String getFullDescription() {
+        return String.format(
+                "Przedmiot: %s (%s), Typ: %s, Punkty ECTS: %d",
+                name, abbreviation, subjectType.name(), numberOfECTS
+        );
+    }
+
+    public static int generateECTSForType(SubjectType type) {
+        int min, max;
+        switch (type) {
+            case MANDATORY -> {
+                min = 4;
+                max = 8;
+            }
+            case ADDITIONAL -> {
+                min = 2;
+                max = 5;
+            }
+            default -> throw new IllegalArgumentException("Unknown type: " + type);
+        }
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }

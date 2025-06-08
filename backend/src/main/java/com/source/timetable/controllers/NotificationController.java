@@ -65,8 +65,8 @@ public class NotificationController {
 
         Notification notification = new Notification();
         notification.setStudent(student);
-        notification.setCurrentGroup(String.valueOf(dto.currentGroup));
-        notification.setTargetGroup(String.valueOf(dto.targetGroup));
+        notification.setCurrentGroup(dto.currentGroup);
+        notification.setTargetGroup(dto.targetGroup);
         notification.setDescription(dto.description);
         notification.setNotificationStatus(dto.notificationStatus);
 
@@ -102,7 +102,7 @@ public class NotificationController {
         }
 
         Student student = notification.getStudent();
-        GroupOfStudents newGroup = groupService.getGroupByName(notification.getTargetGroup());
+        GroupOfStudents newGroup = groupService.getById(notification.getTargetGroup());
 
         if (newGroup == null) {
             return ResponseEntity.notFound().build();

@@ -1,8 +1,13 @@
 package com.source.timetable.controllers;
 
 import com.source.timetable.DTOs.LessonEvent;
+import com.source.timetable.enums.RequestStatus;
 import com.source.timetable.models.Lesson;
+import com.source.timetable.models.Professor;
+import com.source.timetable.models.Request;
 import com.source.timetable.services.LessonService;
+import com.source.timetable.services.ProfessorService;
+import com.source.timetable.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +24,15 @@ public class LessonController {
 
     private final LessonService lessonService;
 
+    private final RequestService requestService;
+
+    private final ProfessorService professorService;
+
     @Autowired
-    public LessonController(LessonService lessonService) {
+    public LessonController(LessonService lessonService, RequestService requestService, ProfessorService professorService) {
         this.lessonService = lessonService;
+        this.requestService = requestService;
+        this.professorService = professorService;
     }
 
     @GetMapping("/group/{groupId}")
@@ -46,11 +57,16 @@ public class LessonController {
             LocalDate date = LocalDate.parse(body.get("date"));
             LocalTime startTime = LocalTime.parse(body.get("startTime"));
             LocalTime endTime = LocalTime.parse(body.get("endTime"));
-
             boolean success = lessonService.updateLessonTime(professorId, date, startTime, endTime);
-
             if (!success) {
                 return ResponseEntity.status(404).build();
+            }
+
+            Professor professor = professorService.getProfessorById(professorId);
+            Request request = requestService.findByProfessorDateAndTime(professor, date, startTime);
+            if (request != null) {
+                request.setRequestStatus(RequestStatus.IMPLEMENTED);
+                requestService.updateRequest(request);
             }
 
             return ResponseEntity.ok().build();

@@ -95,9 +95,19 @@ public class RequestController {
         if (request == null) {
             return ResponseEntity.notFound().build();
         }
+
         try {
-            request.setRequestStatus(RequestStatus.valueOf(newStatus));
-            requestService.createRequest(request);
+            RequestStatus statusToSet = RequestStatus.valueOf(newStatus);
+            if (statusToSet == RequestStatus.ACCEPTED) {
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime classDateTime = LocalDateTime.of(request.getClassesDate(), request.getClassesTime());
+                long daysDiff = Duration.between(now, classDateTime).toDays();
+                if (daysDiff < 2) {
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+            request.setRequestStatus(statusToSet);
+            requestService.updateRequest(request);
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
