@@ -15,10 +15,10 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String name;
 
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String abbreviation;
 
     @Column(nullable=false, name = "number_of_ect")

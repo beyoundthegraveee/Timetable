@@ -49,7 +49,6 @@ public class NotificationController {
     @GetMapping("/student/{id}")
     public ResponseEntity<List<Notification>> getNotificationsByStudent(@PathVariable int id) {
         Student student = studentService.getStudentById(id);
-        System.out.println(student);
         if (student == null) {
             return ResponseEntity.notFound().build();
         }
