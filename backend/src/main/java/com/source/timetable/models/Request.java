@@ -1,5 +1,6 @@
 package com.source.timetable.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.source.timetable.enums.RequestStatus;
 import jakarta.persistence.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -27,10 +28,12 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name = "professor_id", nullable = false)
+    @JsonIgnore
     private Professor professor;
 
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
+    @JsonIgnore
     private Subject subject;
 
     @Column(nullable = false)
@@ -39,5 +42,62 @@ public class Request {
 
     public Request() {
 
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDate getClassesDate() {
+        return classesDate;
+    }
+
+    public void setClassesDate(LocalDate classesDate) {
+        this.classesDate = classesDate;
+    }
+
+    public LocalTime getClassesTime() {
+        return classesTime;
+    }
+
+    public void setClassesTime(LocalTime classesTime) {
+        this.classesTime = classesTime;
+    }
+
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(RequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -6,15 +6,28 @@ import "../styles/timetable.css";
 import Cookies from "js-cookie";
 
 const TimeTablePage = () => {
-    const [events, setEvents] = useState([])
+    const [events, setEvents] = useState([]);
+    const role = Cookies.get("role");
     const groupId = Cookies.get("groupId");
+    const professorId = Cookies.get("userId");
 
     useEffect(() => {
-        if (!groupId) return;
-        axios.get(`http://localhost:8080/lessons/group/${groupId}`)
-            .then(res => setEvents(res.data))
-            .catch(err => console.error("Error fetching lessons", err));
-    }, [groupId]);
+        const fetchLessons = async () => {
+            try {
+                if (role === "STUDENT" && groupId) {
+                    const res = await axios.get(`http://localhost:8080/lessons/group/${groupId}`);
+                    setEvents(res.data);
+                } else if (role === "PROFESSOR" && professorId) {
+                    const res = await axios.get(`http://localhost:8080/lessons/professor/${professorId}`);
+                    setEvents(res.data);
+                }
+            } catch (err) {
+                console.error("Error fetching lessons", err);
+            }
+        };
+
+        fetchLessons();
+    }, [role, groupId, professorId]);
 
     return (
         <div className="content timetable-page">

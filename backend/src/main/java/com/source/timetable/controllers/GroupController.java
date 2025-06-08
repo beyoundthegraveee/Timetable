@@ -8,12 +8,10 @@ import com.source.timetable.services.GroupService;
 import com.source.timetable.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -64,6 +62,28 @@ public class GroupController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(group.getId());
+    }
+
+    @PostMapping("/transfer-student")
+    public ResponseEntity<Void> transferStudent(@RequestBody Map<String, String> body) {
+        try {
+            int studentId = Integer.parseInt(body.get("studentId"));
+            int toGroupId = Integer.parseInt(body.get("toGroupId"));
+
+            Student student = studentService.getStudentById(studentId);
+            GroupOfStudents newGroup = groupService.getById(toGroupId);
+
+            if (student == null || newGroup == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            student.setGroupOfStudents(newGroup);
+            studentService.save(student);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

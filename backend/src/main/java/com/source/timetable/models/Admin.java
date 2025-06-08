@@ -33,5 +33,27 @@ public class Admin extends User{
         this.accountStatus = accountStatus;
     }
 
+    public LocalDate getEmploymentDate() {
+        return employmentDate;
+    }
 
+    public void setEmploymentDate(LocalDate employmentDate) {
+        this.employmentDate = employmentDate;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public Map<Integer, AccessRight> getAccessRights() {
+        return accessRights;
+    }
+
+    public void setAccessRights(Map<Integer, AccessRight> accessRights) {
+        this.accessRights = accessRights;
+    }
 }

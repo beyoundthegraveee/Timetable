@@ -26,18 +26,59 @@ public class Professor extends User{
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests;
 
+    @OneToMany(mappedBy = "professor")
+    private List<Lesson> lessons;
+
+
     public Professor() {
         super();
     }
 
-    public Professor(int id, String firstName, String lastName, LocalDate birthDate, String email, String login, String password, LocalDate employmentDate, String phoneNumber, String academicDegree, String departmentName) {
-        super(id, firstName, lastName, birthDate, email, login, password);
-        this.employmentDate = employmentDate;
-        this.phoneNumber = phoneNumber;
-        this.academicDegree = academicDegree;
-        this.departmentName = departmentName;
-        this.requests = new ArrayList<>();
+    public LocalDate getEmploymentDate() {
+        return employmentDate;
     }
 
+    public void setEmploymentDate(LocalDate employmentDate) {
+        this.employmentDate = employmentDate;
+    }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAcademicDegree() {
+        return academicDegree;
+    }
+
+    public void setAcademicDegree(String academicDegree) {
+        this.academicDegree = academicDegree;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
 }

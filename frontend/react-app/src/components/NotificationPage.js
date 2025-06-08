@@ -9,6 +9,7 @@ const NotificationPage = () => {
     const navigate = useNavigate();
     const user = Cookies.get("user");
     const studentId = user ? JSON.parse(user).id : null;
+    console.log('student id:', studentId);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/notifications/student/${studentId}`)
