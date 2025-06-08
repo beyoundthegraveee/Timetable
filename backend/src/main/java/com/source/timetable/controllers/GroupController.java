@@ -2,9 +2,12 @@ package com.source.timetable.controllers;
 
 import com.source.timetable.DTOs.GroupDTO;
 import com.source.timetable.DTOs.StudentDTO;
+import com.source.timetable.enums.NotificationStatus;
 import com.source.timetable.models.GroupOfStudents;
+import com.source.timetable.models.Notification;
 import com.source.timetable.models.Student;
 import com.source.timetable.services.GroupService;
+import com.source.timetable.services.NotificationService;
 import com.source.timetable.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +25,13 @@ public class GroupController {
 
     private final StudentService studentService;
 
+    private final NotificationService notificationService;
+
     @Autowired
-    public GroupController(GroupService groupService, StudentService studentService) {
+    public GroupController(GroupService groupService, StudentService studentService, NotificationService notificationService) {
         this.groupService = groupService;
         this.studentService = studentService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping
@@ -68,17 +74,22 @@ public class GroupController {
     public ResponseEntity<Void> transferStudent(@RequestBody Map<String, String> body) {
         try {
             int studentId = Integer.parseInt(body.get("studentId"));
+            int fromGroupId = Integer.parseInt(body.get("fromGroupId"));
             int toGroupId = Integer.parseInt(body.get("toGroupId"));
-
             Student student = studentService.getStudentById(studentId);
             GroupOfStudents newGroup = groupService.getById(toGroupId);
-
+            GroupOfStudents oldGroup = groupService.getById(fromGroupId);
             if (student == null || newGroup == null) {
                 return ResponseEntity.notFound().build();
             }
-
             student.setGroupOfStudents(newGroup);
             studentService.save(student);
+
+            Notification notification = notificationService.findByStudentAndGroups(student, fromGroupId, toGroupId);
+            if (notification != null) {
+                notification.setNotificationStatus(NotificationStatus.IMPLEMENTED);
+                notificationService.saveNotification(notification);
+            }
 
             return ResponseEntity.ok().build();
         } catch (Exception e) {

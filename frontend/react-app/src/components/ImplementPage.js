@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 import '../styles/implement.css';
+import '../styles/modal.css';
 
 const ImplementPage = () => {
     const [notifications, setNotifications] = useState([]);
     const [requests, setRequests] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+
+    const fetchData = async () => {
+        try {
+            const [notificationsRes, requestsRes] = await Promise.all([
+                axios.get('http://localhost:8080/notifications/approval'),
+                axios.get('http://localhost:8080/requests/accepted')
+            ]);
+            setNotifications(notificationsRes.data);
+            setRequests(requestsRes.data);
+        } catch (err) {
+            console.error('Failed to fetch data:', err);
+        }
+    };
 
     useEffect(() => {
-        axios.get('http://localhost:8080/notifications/approval')
-            .then(res => setNotifications(res.data))
-            .catch(err => console.error('Failed to fetch notifications:', err));
-
-        axios.get('http://localhost:8080/requests/accepted')
-            .then(res => setRequests(res.data))
-            .catch(err => console.error('Failed to fetch requests:', err));
+        fetchData();
     }, []);
-
 
     const calculateEndTime = (startTime) => {
         const [hours, minutes] = startTime.split(':').map(Number);
@@ -26,6 +36,17 @@ const ImplementPage = () => {
         return `${String(finalHours).padStart(2, '0')}:${String(finalMinutes).padStart(2, '0')}`;
     };
 
+    const openModal = (message) => {
+        setModalMessage(message);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setModalMessage('');
+    };
+
+
     const handleImplementRequest = async (request) => {
         try {
             const endTime = calculateEndTime(request.classesTime);
@@ -35,9 +56,11 @@ const ImplementPage = () => {
                 startTime: request.classesTime,
                 endTime: endTime
             });
-            alert('Lesson time updated successfully.');
+            openModal('Lesson time updated successfully.');
+            fetchData();
         } catch (err) {
             console.error('Failed to update lesson:', err);
+            openModal('Failed to update lesson.');
         }
     };
 
@@ -46,11 +69,13 @@ const ImplementPage = () => {
             await axios.post(`http://localhost:8080/groups/transfer-student`, {
                 studentId: notification.studentId,
                 fromGroupId: notification.currentGroup,
-                toGroupName: notification.targetGroup
+                toGroupId: notification.targetGroup
             });
-            alert('Student transferred successfully.');
+            openModal('Student transferred successfully.');
+            fetchData();
         } catch (err) {
             console.error('Failed to transfer student:', err);
+            openModal('Failed to transfer student.');
         }
     };
 
@@ -58,7 +83,6 @@ const ImplementPage = () => {
         <div className="implement-background">
             <div className="implement-page">
                 <h2>Implement Approved Changes</h2>
-
                 <div className="implement-section">
                     <h3>Requests (ACCEPTED)</h3>
                     {requests.map(r => (
@@ -79,6 +103,18 @@ const ImplementPage = () => {
                     ))}
                 </div>
             </div>
+
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                ariaHideApp={false}
+                contentLabel="Implementation Result"
+                className="modal"
+                overlayClassName="modal-overlay"
+            >
+                <h2>{modalMessage}</h2>
+                <button onClick={closeModal}>Close</button>
+            </Modal>
         </div>
     );
 };

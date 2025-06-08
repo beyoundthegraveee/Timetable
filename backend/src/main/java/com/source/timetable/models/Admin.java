@@ -4,6 +4,7 @@ import com.source.timetable.enums.AccountStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,4 +57,14 @@ public class Admin extends User{
     public void setAccessRights(Map<Integer, AccessRight> accessRights) {
         this.accessRights = accessRights;
     }
+
+    @Transient
+    public int getTraineeship() {
+        return Period.between(employmentDate, LocalDate.now()).getYears();
+    }
+
+    @Override
+    public String getUserTypeInfo(){
+        return "Admin " + this.getFirstName() + " "+ this.getLastName()+" has: " + accessRights + " his account is: " + accountStatus;
+    };
 }

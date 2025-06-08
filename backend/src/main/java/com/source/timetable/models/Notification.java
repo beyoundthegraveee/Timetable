@@ -18,16 +18,16 @@ public class Notification {
     private Student student;
 
     @Column(nullable = false)
-    private String currentGroup;
+    private int currentGroup;
 
     @Column(nullable = false)
-    private String targetGroup;
+    private int targetGroup;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private NotificationStatus notificationStatus;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String description;
 
 
@@ -51,19 +51,19 @@ public class Notification {
         this.student = student;
     }
 
-    public String getCurrentGroup() {
+    public int getCurrentGroup() {
         return currentGroup;
     }
 
-    public void setCurrentGroup(String currentGroup) {
+    public void setCurrentGroup(int currentGroup) {
         this.currentGroup = currentGroup;
     }
 
-    public String getTargetGroup() {
+    public int getTargetGroup() {
         return targetGroup;
     }
 
-    public void setTargetGroup(String targetGroup) {
+    public void setTargetGroup(int targetGroup) {
         this.targetGroup = targetGroup;
     }
 

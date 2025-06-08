@@ -48,14 +48,22 @@ const ManagePage = () => {
         } else if (type === 'request') {
             status = action === 'APPROVE' ? 'ACCEPTED' : 'REJECTED';
         }
-
         try {
-            console.log('Selected item:', selectedItem);
             const url = type === 'notification'
                 ? `http://localhost:8080/notifications/${selectedItem.id}/status`
                 : `http://localhost:8080/requests/${selectedItem.id}/status`;
 
             await axios.patch(url, { status });
+            if (type === 'notification') {
+                const res = await axios.get('http://localhost:8080/notifications/pending');
+                setNotifications(res.data);
+            } else if (type === 'request') {
+                const res = await axios.get('http://localhost:8080/requests/submitted');
+                setRequests(res.data);
+            }
+            setSelectedItem(null);
+            setType('');
+
             openModal(`${type.charAt(0).toUpperCase() + type.slice(1)} updated successfully.`);
         } catch (err) {
             console.error('Failed to update status:', err);

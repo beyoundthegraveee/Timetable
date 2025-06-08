@@ -53,6 +53,14 @@ public class User {
         this.password = password;
     }
 
+    public String getUserTypeInfo(){
+        return "User with email: " + email +" and Full Name: "+ firstName + " " + lastName + " got born at " + birthDate;
+    };
+
+    public static boolean isValidEmail(String email) {
+        return email != null && email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
+
 
     @JsonProperty("id")
     public int getId() {

@@ -18,8 +18,8 @@ public class ImplementNotificationDTO {
         dto.studentId = notification.getStudent().getId();
         dto.studentName = notification.getStudent().getFirstName() + " " +
                 notification.getStudent().getLastName();
-        dto.currentGroup = Integer.parseInt(notification.getCurrentGroup());
-        dto.targetGroup = Integer.parseInt(notification.getTargetGroup());
+        dto.currentGroup = notification.getCurrentGroup();
+        dto.targetGroup = notification.getTargetGroup();
         dto.description = notification.getDescription();
         dto.notificationStatus = notification.getNotificationStatus();
         return dto;

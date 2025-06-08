@@ -36,7 +36,7 @@ public class Request {
     @JsonIgnore
     private Subject subject;
 
-    @Column(nullable = false)
+    @Column(name = "description", nullable = true)
     private String description;
 
 
