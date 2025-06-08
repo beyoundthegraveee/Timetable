@@ -31,7 +31,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String login;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)

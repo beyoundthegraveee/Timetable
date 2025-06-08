@@ -78,8 +78,7 @@ public class GroupController {
             int toGroupId = Integer.parseInt(body.get("toGroupId"));
             Student student = studentService.getStudentById(studentId);
             GroupOfStudents newGroup = groupService.getById(toGroupId);
-            GroupOfStudents oldGroup = groupService.getById(fromGroupId);
-            if (student == null || newGroup == null) {
+            if (student == null) {
                 return ResponseEntity.notFound().build();
             }
             student.setGroupOfStudents(newGroup);

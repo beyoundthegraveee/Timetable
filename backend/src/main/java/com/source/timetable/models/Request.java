@@ -38,12 +38,11 @@ public class Request {
 
     @Column(name = "description", nullable = true)
     private String description;
-
+    
 
     public Request() {
 
     }
-
 
     public int getId() {
         return id;

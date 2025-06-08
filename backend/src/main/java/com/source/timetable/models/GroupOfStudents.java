@@ -72,4 +72,8 @@ public class GroupOfStudents {
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
     }
+
+    public boolean isFull() {
+        return students.size() >= maxCountOfStudents;
+    }
 }

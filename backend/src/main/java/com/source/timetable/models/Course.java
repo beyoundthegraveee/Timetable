@@ -74,6 +74,9 @@ public class Course {
 
     public void setExam(Exam exam) {
         this.exam = exam;
+        if (exam != null) {
+            exam.setCourse(this);
+        }
     }
 
     public List<Lesson> getLessons() {

@@ -42,6 +42,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Student createStudent(CreateStudentDTO dto) {
         GroupOfStudents group = groupRepo.findById(dto.groupId).orElseThrow();
+        if (group.isFull()) {
+            throw new IllegalStateException("Group " + group.getName() + " is already full");
+        }
         Student student = new Student();
         fillUserFields(student, dto);
         student.setRole(Role.STUDENT);
@@ -49,7 +52,9 @@ public class UserServiceImpl implements UserService {
         student.setNationality(dto.nationality);
         student.setCurrentSemester(dto.currentSemester);
         student.setGroupOfStudents(group);
-        return studentRepo.save(student);
+        Student saved = studentRepo.save(student);
+        System.out.println(saved.getUserTypeInfo());
+        return saved;
     }
 
     @Override
@@ -61,7 +66,9 @@ public class UserServiceImpl implements UserService {
         prof.setAcademicDegree(dto.academicDegree);
         prof.setDepartmentName(dto.departmentName);
         prof.setEmploymentDate(dto.employmentDate);
-        return professorRepo.save(prof);
+        Professor saved = professorRepo.save(prof);
+        System.out.println(saved.getUserTypeInfo());
+        return saved;
     }
 
     @Override
@@ -71,7 +78,9 @@ public class UserServiceImpl implements UserService {
         admin.setRole(Role.ADMINISTRATOR);
         admin.setEmploymentDate(dto.employmentDate);
         admin.setAccountStatus(dto.accountStatus);
-        return adminRepo.save(admin);
+        Admin saved = adminRepo.save(admin);
+        System.out.println(saved.getUserTypeInfo());
+        return saved;
     }
 
     private void fillUserFields(User user, CreateUserDTO dto) {
