@@ -2,21 +2,14 @@ University Timetable Manager - a simple web application for managing teachers‘
 The system enables each user to log in, view their schedule, and perform actions based on their role.
 
 
-Backend:
--Java
--Spring Boot (REST API)
--Spring Data JPA
--Mysql
+Backend:Java, Spring Boot (REST API), Spring Data JPA, WebMvcConfigurer, Mysql
 
-Frontend:
--Javascript
--CSS
--React
+Frontend:Javascript, CSS, React, Axios, js-cookie
 
 
 ## 🖼 Screenshots
 
-![Step 1](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st1.png?raw=true)
+![Step 1](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st1.JPG?raw=true)
 
 ![Step 2](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st2.JPG?raw=true)
 
