@@ -6,6 +6,7 @@ Backend:Java, Spring Boot (REST API), Spring Data JPA, WebMvcConfigurer, Mysql
 
 Frontend:Javascript, CSS, React, Axios, js-cookie
 
+Background images: https://www.instagram.com/k1llm31mmortal/
 
 ## 🖼 Screenshots
 
