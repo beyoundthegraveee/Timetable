@@ -14,4 +14,16 @@ Frontend:
 -React
 
 
-![Alt text](img/img_st1.png)
+## 🖼 Screenshots
+
+![Step 1](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st1.png?raw=true)
+
+![Step 2](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st2.JPG?raw=true)
+
+![Step 3](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st3.png?raw=true)
+
+![Step 4](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st4.JPG?raw=true)
+
+![Step 5](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st5.JPG?raw=true)
+
+![Step 6](https://github.com/beyoundthegraveee/university-timetable-manager/blob/main/img/img_st6.JPG?raw=true)
